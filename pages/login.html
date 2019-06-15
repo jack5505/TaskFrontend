@@ -1,0 +1,31 @@
+<div class="login-box">
+    <div class="login-logo">
+        <a href="#">Studentlar</a>
+    </div>
+    <!-- /.login-logo -->
+    <div class="login-box-body">
+        <p class="login-box-msg">Login va paroligizni kiriting</p>
+
+        <form method="post">
+            <div class="form-group has-feedback">
+                <input type="text" class="form-control" placeholder="Login" ng-model="login">
+                <span class="glyphicon glyphicon-user form-control-feedback"></span>
+            </div>
+            <div class="form-group has-feedback">
+                <input type="password" class="form-control" placeholder="Password" ng-model="password">
+                <span class="glyphicon glyphicon-lock form-control-feedback"></span>
+            </div>
+            <div class="row">
+                <!-- /.col -->
+                <div class="col-xs-4">
+                    <button ng-click="loginBtn(login, password)" type="submit" class="btn btn-primary btn-block btn-flat">Kirish</button>
+                </div>
+                <div class="col-xs-8">
+                    <p ng-show="authError" class="text-red">Login yoki parol noto'g'ri</p>
+                </div>
+                <!-- /.col -->
+            </div>
+        </form>
+    </div>
+    <!-- /.login-box-body -->
+</div>

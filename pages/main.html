@@ -1,274 +1,37 @@
-<div ng-controller="studentsCtrl">
-    <section class="content-header">
-        <h1>
-            Talabalar
-            <small>Boshqaruv paneli</small>
-        </h1>
-    </section>
-    <!-- Main content -->
-    <section class="content" style="min-height: 500px">
-        <div class="row">
-            <div class="col-xs-12">
-                <div class="box">
-                    <div class="box-header">
-                        <div class="row" style="margin-top: 10px">
-                            <div class="col-sm-6">
-                                <small style="font-size: 18px;">Ro'yhatga olingan talabalar</small>
-                            </div>
-                            <div class="col-sm-6">
-                                <button data-toggle="modal" data-target="#whsModal" class="btn btn-success btn-sm"
-                                        style="float: right;" ng-click="getGroups()"><i class="fa  fa-user-plus"> </i></button>
-                                <button data-toggle="modal" data-target="#groupModal" class="btn btn-success btn-md">Guruh qo`shish</button>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- /.box-header -->
-                    <div class="box-body">
-                        <table class="table table-bordered table-hover">
-                            <thead>
-                            <tr>
-                                <th>N</th>
-                                <th>Ismi</th>
-                                <th>Familiyasi</th>
-                                <th>Yoshi</th>
-                                <th>Manzili</th>
-                                <th>Guruh</th>
-                                <th>Telefon raqami</th>
-                                <th>O`zgartirishlar</th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            <tr ng-repeat="whs in students">
-                                <td>{{$index + 1}}</td>
-                                <td>{{whs.firstname}}</td>
-                                <td>{{whs.lastname}}</td>
-                                <td>{{whs.age}}</td>
-                                <td>{{whs.address}}</td>
-                                <td>{{whs.groups}}</td>
-                                <td>
-                                    <p ng-repeat="tel in whs.phone">
-                                        {{tel}}
-                                    </p>
-                                </td>
-                                <td>
-                                    <button class="btn btn-danger btn-xs"><span
-                                            class="glyphicon glyphicon-trash"></span></button>
-                                    <button class="btn btn-primary btn-xs" ng-click="editBtn(whs.whsId)"
-                                            data-toggle="modal" data-target="#whsModal"
-                                    ><span class="glyphicon glyphicon-pencil"></span></button>
-                                </td>
-                            </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                    <!-- /.box-body -->
-                </div>
-                <!-- /.box -->
+<header ng-include="'pages/header.html'" class="main-header" >
 
+</header>
+<!-- Left side column. contains the logo and sidebar -->
+<aside ng-include="'pages/sidebar.html'" class="main-sidebar" >
+
+</aside>
+<!-- Content Wrapper. Contains page content -->
+<div ng-include="contentUrl" class="content-wrapper">
+    <!-- Content Header (Page header) -->
+
+    <!-- /.content -->
+</div>
+
+
+<!-- /.content -->
+</div>
+<div class="control-sidebar-bg"></div>
+<!-- Modal -->
+<div class="modal fade" id="myModal" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Tizimdan chiqish</h4>
             </div>
-            <!-- /.col -->
-        </div>
-        <!-- /.row -->
-        <!-- Small boxes (Stat box) -->
-    </section>
-
-    <div class="modal" id="groupModal" role="dialog">
-        <div class="modal-dialog modal-md">
-            <div class="modal-content">
-                    <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal">&times;</button>
-                        <h4 class="modal-title">Yangi Gruppa qoshish</h4>
-                    </div>
-                <div class="modal-body">
-                    <div class="row">
-                        <div class="">
-                            <form role="form">
-                                <div class="box-body">
-                                        <div class="form-group">
-                                            <label for="groups123">Guruh</label>
-                                            <div class="input-group">
-                                                <input id="groups123" type="text" class="form-control"
-                                                       placeholder="942-15"
-                                                       ng-model="inputgroup">
-                                                <span class="input-group-addon"><i class="fa fa-font"></i></span>
-                                            </div>
-
-                                        </div>
-                                </div>
-
-                            </form>
-                        </div>
-                    </div>
-                </div>
-                <div class="modal-footer">
-                    <button ng-click="creatGroup()" type="button" class="btn btn-success"
-                            data-dismiss="modal">{{btnName}}
-                    </button>
-                </div>
+            <div class="modal-body">
+                <p>Hurmatli {{userName}} tizimdan chiqishni tasdiqlaysizmi? .</p>
             </div>
-
-        </div>
-    </div>
-
-    <!-- Add and edit Modal -->
-    <div class="modal fade" id="whsModal" role="dialog">
-        <div class="modal-dialog modal-md">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal">&times;</button>
-                    <h4 class="modal-title">Yangi foydalanuvchini ro'yhatga olish</h4>
-                </div>
-                <div class="modal-body">
-                    <div class="row">
-                        <div class="">
-                            <form role="form">
-                                <div class="box-body">
-                                    <div class="form-group">
-                                        <label for="exampleInputEmail1">Ism</label>
-                                        <div class="input-group">
-                                            <input id="exampleInputEmail1" type="text" class="form-control"
-                                                   placeholder="Jahongir"
-                                                   ng-model="firstname">
-                                            <span class="input-group-addon"><i class="fa fa-font"></i></span>
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="input022">Familiya</label>
-                                        <div class="input-group">
-                                            <input id="input022" type="text" class="form-control"
-                                                   placeholder="Sharipov"
-                                                   ng-model="lastname">
-                                            <span class="input-group-addon"><i class="fa fa-font"></i></span>
-                                        </div>
-                                    </div>
-
-                                    <div class="form-group">
-                                        <label for="input022">Guruh</label>
-                                        <div class="input-group">
-                                            <select class="form-control" name="" id="" ng-model="selectedgroup" ng-options="x.groupName for x in groups"></select>
-                                            <span class="input-group-addon"><i></i></span>
-                                        </div>
-                                    </div>
-
-                                    <div class="form-group">
-                                        <label for="input06">Yoshi</label>
-                                        <div class="input-group">
-                                            <input id="input06" type="text" class="form-control"
-                                                   placeholder="15 yosh"
-                                                   ng-model="age">
-                                            <span class="input-group-addon"><i class="fa fa-phone"></i></span>
-                                        </div>
-                                    </div>
-
-                                    <div class="form-group">
-                                        <label for="input10">Asosiy Tel.</label>
-                                        <div class="input-group">
-                                            <input id="input10" type="text" class="form-control"
-                                                   placeholder="+998621234567"
-                                                   ng-model="ph">
-                                            <span class="input-group-addon"><button class="fa fa-phone" ng-click="addPhones()"></button></span>
-                                        </div>
-                                            <!--<ul>-->
-                                                <!--<li class="form-control" ng-repeat="x in phone1">{{x}} <button ng-click="removephones($index)">X</button></li>-->
-                                            <!--</ul>-->
-
-                                    </div>
-
-                                    <div class="form-group" ng-repeat="x in phone1">
-
-                                        <div class="input-group">
-                                            <input  type="text" class="form-control"
-                                                   ng-model="phone1[$index]">
-                                            <span class="input-group-addon"><button ng-click="removephones($index)"> X </button></span>
-                                        </div>
-                                    </div>
-
-                                    <div class="form-group">
-                                        <label for="input09">Address</label>
-                                        <div class="input-group">
-                                            <input id="input09" type="text" class="form-control"
-                                                   placeholder="M.horazm 86"
-                                                   ng-model="address">
-                                            <span class="input-group-addon"><i class="fa fa-phone"></i></span>
-                                        </div>
-                                    </div>
-
-                                </div>
-                            </form>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="modal-footer">
-                    <button ng-click="btnWhsCtrl()" type="button" class="btn btn-success"
-                            data-dismiss="modal">{{btnName}}
-                    </button>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!--send file modal -->
-    <div class="modal fade" id="sendFileModal" role="dialog">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal">&times;</button>
-                    <h4 class="modal-title">Yangi file jo'natish</h4>
-                </div>
-                <div class="modal-body">
-
-                    <div class="row">
-                        <div class="col-sm-12">
-                            <form role="form">
-                                <div class="box-body">
-                                    <div class="form-group">
-                                        <label>Muddat</label>
-                                        <div for="date" class="input-group">
-                                            <input fileread="fileChoose" class="w3-input w3-border" type="file" required
-                                                   accept="excel/*"
-                                                   name="file" multiple="multiple"
-                                                   ng-files="getTheFiles($files)">
-                                            <span class="input-group-addon"><i
-                                                    class="fa  fa-calendar-plus-o"></i></span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </form>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="modal-footer">
-                    <button ng-click="sendFile()" type="button" class="btn btn-success"
-                            data-dismiss="modal">Jo'natish
-                    </button>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Whs block Modal -->
-    <div class="modal fade" id="whsBlock" role="dialog">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal">&times;</button>
-                    <h4 class="modal-title">Optivikni blocklash</h4>
-                </div>
-                <div class="modal-body">
-                    <b>{{selectedWhsName}}</b> nomli optivikni blocklashni tasdiqlaysizmi?
-                </div>
-
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-danger"
-                            data-dismiss="modal">Yo'q
-                    </button>
-                    <button ng-click="blockWhs()" type="button" class="btn btn-success"
-                            data-dismiss="modal">Xa
-                    </button>
-                </div>
+            <div class="modal-footer">
+                <button ng-click="logoutBtn()" type="button" class="btn btn-success" data-dismiss="modal">Xa</button>
+                <button type="button" class="btn btn-danger" data-dismiss="modal">Yo'q</button>
             </div>
         </div>
     </div>
 </div>
+

@@ -12,10 +12,15 @@ app.directive('ngFiles', ['$parse', function ($parse) {
         link: fn_link
     }
 }]);
+
 app.controller('studentsCtrl', function ($scope, $http) {
     $scope.phone1 = [];
     $scope.selectedgroup = "";
     $scope.groups = "";
+    $scope.age = {
+        value: new Date(2019, 1,1)
+    }
+
 
     $scope.addPhones = function(){
             if($scope.ph.length >= 1){
@@ -26,6 +31,7 @@ app.controller('studentsCtrl', function ($scope, $http) {
     $scope.removephones = function(x){
             $scope.phone1.splice(x,1);
     };
+
     $scope.getGroups = function(){
         $http({
             url:$scope.baseUrl+"groups",
@@ -74,6 +80,7 @@ app.controller('studentsCtrl', function ($scope, $http) {
             phone: $scope.phone1,
             groups: $scope.selectedgroup.id,
         };
+
         $http({
             url: $scope.baseUrl,
             dataType: 'json',
@@ -122,6 +129,10 @@ app.controller('studentsCtrl', function ($scope, $http) {
             $scope.inputgroup = ""
         })
 
+    }
+    $scope.sendFile = function () {
+        alert("hi");
+        console.log($scope.files);
     }
 
 });
