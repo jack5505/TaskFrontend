@@ -60,6 +60,7 @@ app.controller('studentsCtrl', function ($scope, $http) {
             }
         }).then(function (response) {
             $scope.students = response.data;
+            $scope.studentTable = new NgTableParams({},{dataset:response.data});
             console.log(response.data);
         }, function (error) {
             alert('Error in get WholeSalers');

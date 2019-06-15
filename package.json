@@ -23,6 +23,7 @@
     "grunt-includes": "^0.4.5"
   },
   "dependencies": {
-    "angular-file-upload": "^2.5.0"
+    "angular-file-upload": "^2.5.0",
+    "ng-table": "^3.0.1"
   }
 }

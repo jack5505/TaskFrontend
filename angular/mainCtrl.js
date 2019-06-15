@@ -45,10 +45,6 @@ app.controller('mainCtrl', function ($scope, $http) {
         }, function (error) {
             // alert("Error in login");
             $scope.authError = true;
-            $scope.bodyStyle = 'hold-transition skin-blue sidebar-mini fixed';
-            $scope.bodyContent = 'pages/main.html';
-            $scope.contentUrl = 'pages/student.html';
-
         });
     };
 
