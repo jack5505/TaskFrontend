@@ -9,7 +9,7 @@ app.controller('mainCtrl', function ($scope, $http) {
         $scope.sideMenuActive = ["active", "", "", "", "", "", "", ""];
         $scope.sideMenuActiveIndex = 0;
         $scope.contentUrl = 'pages/main.html';
-        $scope.userName = '';
+        $scope.userName = 'Sabirov Jahongir(Admin)';
         $scope.baseUrl = 'http://localhost:8080/';
         $scope.token = "";
         $scope.authError = false;
