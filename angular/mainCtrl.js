@@ -16,6 +16,7 @@ app.controller('mainCtrl', function ($scope, $http) {
         $scope.proba = "";
         $scope.btnName = "Qo'shish";
         $scope.userId = "";
+        $scope.moderatoView  = false;
     };
     $scope.start();
 
@@ -40,6 +41,10 @@ app.controller('mainCtrl', function ($scope, $http) {
                 $scope.bodyContent = 'pages/main.html';
                 $scope.contentUrl = 'pages/student.html';
                 $scope.userId = userInfo.id;
+                if($scope.userId == 1){
+                    $scope.moderatoView = true;
+                }
+                $scope.userName = userInfo.fio+"("+userInfo.role+")";
             }else{
                 $scope.authError = true;
             }
@@ -48,6 +53,10 @@ app.controller('mainCtrl', function ($scope, $http) {
             // alert("Error in login");
             $scope.authError = true;
         });
+    };
+    // Logout button
+    $scope.logoutBtn = function () {
+        $scope.start();
     };
 
 
