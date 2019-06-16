@@ -24,15 +24,15 @@
                     <!-- /.box-header -->
                     <div class="box-body">
                         <table ng-table ="studentTable" class="table table-bordered table-hover">
-                            <tr ng-repeat="whs in $data">
+                            <tr ng-repeat="x in md">
                                 <td data-title="'№'">{{$index + 1}}</td>
-                                <td data-title="'F.I.O'">{{whs.firstname}}</td>
-                                <td data-title="'Login'">{{whs.lastname}}</td>
-                                <td data-title="'Ro`l'">{{whs.birthDate}}</td>
+                                <td data-title="'F.I.O'">{{x.fio}}</td>
+                                <td data-title="'Login'">{{x.username}}</td>
+                                <td data-title="'Ro`l'">{{x.role}}</td>
                                 <td data-title="'Amallar'">
                                     <button class="btn btn-danger btn-xs"><span
-                                            class="glyphicon glyphicon-trash" ng-click="delete(whs.id)" data-toggle="modal" data-target="#deletModal"></span></button>
-                                    <button class="btn btn-primary btn-xs" ng-click="editBtn(whs.id)"
+                                            class="glyphicon glyphicon-trash" ng-click="deletModerator(whs.id)" data-toggle="modal" data-target="#deletModal"></span></button>
+                                    <button class="btn btn-primary btn-xs" ng-click="editModerator(whs.id)"
                                             data-toggle="modal" data-target="#whsModal"
                                     ><span class="glyphicon glyphicon-pencil"></span></button>
                                 </td>
@@ -105,8 +105,16 @@
                                     <div class="form-group">
                                         <label for="input06">Parol</label>
                                         <div class="input-group">
-                                            <input id="input06" type="text" class="form-control"
+                                            <input id="input06" type="password" class="form-control"
                                                    ng-model="password">
+                                            <span class="input-group-addon"><i class="fa  fa-birthday-cake"></i></span>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="input06">Parolni tasdiqlash</label>
+                                        <div class="input-group">
+                                            <input type="password" class="form-control"
+                                                   ng-model="passwordMatch">
                                             <span class="input-group-addon"><i class="fa  fa-birthday-cake"></i></span>
                                         </div>
                                     </div>
@@ -119,6 +127,9 @@
 
                                         </div>
                                     </div>
+                                    <div class="form-group">
+                                        <p ng-if="password != passwordMatch" class="text-red">Parol ikkisi to`g`ri kelmayabdi</p>
+                                    </div>
 
 
                                 </div>
@@ -128,7 +139,7 @@
                 </div>
 
                 <div class="modal-footer">
-                    <button ng-click="btnWhsCtrl()" type="button" class="btn btn-success"
+                    <button ng-click="createModerator()" type="button" class="btn btn-success"
                             data-dismiss="modal">{{btnName}}
                     </button>
                 </div>
