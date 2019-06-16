@@ -18,6 +18,7 @@ app.controller('studentsCtrl', function ($scope, $http, NgTableParams) {
     $scope.selectedgroup = "";
     $scope.groups = "";
     $scope.deletedId = "";
+    $scope.saveOrUpdate = -1;
     // $scope.age = {
     //     value: new Date(2019, 1,1)
     // }
@@ -78,22 +79,24 @@ app.controller('studentsCtrl', function ($scope, $http, NgTableParams) {
 
 
         }, function (error) {
-            alert('Error in get WholeSalers');
+            alert('Error in get Students');
         });
     };
     $scope.getWholeSalers();
 
 //    create new whs
-    $scope.createStudent = function () {
-        if($scope.ph.length >= 1){
-            var temp = {
-                phoneName:$scope.ph
+    $scope.createStudent = function (method,id) {
+        if($scope.ph != undefined){
+            if($scope.ph.length >= 1){
+                var temp = {
+                    phoneName:$scope.ph
+                }
+                $scope.phone1.push(temp);
+                $scope.ph = "";
             }
-            $scope.phone1.push(temp);
-            $scope.ph = "";
         }
-        console.log("PleaseCheckIt" + $scope.age);
         var data = {
+            id:id,
             firstname: $scope.firstname,
             lastname: $scope.lastname,
             birthDate: $scope.age,
@@ -107,7 +110,7 @@ app.controller('studentsCtrl', function ($scope, $http, NgTableParams) {
         $http({
             url: $scope.baseUrl,
             dataType: 'json',
-            method: 'POST',
+            method: method,
             data: data,
             headers: {
                 'Content-type': 'application/json',
@@ -129,10 +132,15 @@ app.controller('studentsCtrl', function ($scope, $http, NgTableParams) {
         $scope.age = "10.01.1993";
         $scope.address = "";
         $scope.phone1 = [];
-
+        $scope.saveOrUpdate = -1;
     };
     $scope.btnWhsCtrl = function () {
-        $scope.createStudent();
+        if($scope.saveOrUpdate == -1){
+        $scope.createStudent('POST',$scope.saveOrUpdate);
+        }
+        else{
+        $scope.createStudent('PUT',$scope.saveOrUpdate);
+        }
 
     };
     $scope.creatGroup = function () {
@@ -197,9 +205,23 @@ app.controller('studentsCtrl', function ($scope, $http, NgTableParams) {
           data: data,
           headers:{'Accept':'application/json'}
         };
-        $http.get($scope.baseUrl,config).then(function (response) {
+        $http.get("http://localhost:8080/"+id,config).then(function (response) {
             console.log(response.data);
+            $scope.getGroups();
+            $scope.saveOrUpdate = response.data.id;
+            $scope.firstname = response.data.firstname;
+            $scope.lastname = response.data.lastname;
+            $scope.sex = response.data.gender;
+            $scope.phone1 = response.data.phone;
+            $scope.address = response.data.address;
+            $scope.age = response.data.birthDate;
+            $scope.selectedgroup.groupName = response.data.groups;
         })
     }
+    $scope.update = function () {
+
+
+    }
+
 
 });
