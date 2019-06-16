@@ -15,6 +15,7 @@ app.controller('mainCtrl', function ($scope, $http) {
         $scope.authError = false;
         $scope.proba = "";
         $scope.btnName = "Qo'shish";
+        $scope.userId = "";
     };
     $scope.start();
 
@@ -38,6 +39,7 @@ app.controller('mainCtrl', function ($scope, $http) {
                 $scope.bodyStyle = 'hold-transition skin-blue sidebar-mini fixed';
                 $scope.bodyContent = 'pages/main.html';
                 $scope.contentUrl = 'pages/student.html';
+                $scope.userId = userInfo.id;
             }else{
                 $scope.authError = true;
             }

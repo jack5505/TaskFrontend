@@ -30,15 +30,15 @@
                                 <td data-title="'№'">{{$index + 1}}</td>
                                 <td data-title="'Ismi'">{{whs.firstname}}</td>
                                 <td data-title="'Familiyasi'">{{whs.lastname}}</td>
-                                <td>{{whs.age}}</td>
-                                <td>{{whs.address}}</td>
-                                <td>{{whs.groups}}</td>
-                                <td>
+                                <td data-title="'Tug`ilgan sana'">{{whs.age}}</td>
+                                <td data-title="'Manzil'">{{whs.address}}</td>
+                                <td data-title="'Guruh'">{{whs.groups}}</td>
+                                <td data-title="'Telefon'">
                                     <p ng-repeat="tel in whs.phone">
-                                        {{tel}}
+                                        {{tel.phoneName}}
                                     </p>
                                 </td>
-                                <td>
+                                <td data-title="'Amallar'">
                                     <button class="btn btn-danger btn-xs"><span
                                             class="glyphicon glyphicon-trash"></span></button>
                                     <button class="btn btn-primary btn-xs" ng-click="editBtn(whs.whsId)"
@@ -199,7 +199,7 @@
 
                                         <div class="input-group">
                                             <input  type="text" class="form-control"
-                                                    ng-model="phone1[$index]">
+                                                    ng-model="phone1[$index].phoneName">
                                             <span class="input-group-addon"><button ng-click="removephones($index)"> X </button></span>
                                         </div>
                                     </div>
@@ -210,6 +210,15 @@
                                                    placeholder="M.horazm 86"
                                                    ng-model="address">
                                             <span class="input-group-addon"><i class="fa fa-phone"></i></span>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Jinsi</label>
+                                        <div class="input-group">
+                                            <input type="radio" name="gender" value="Erkak">Erkak
+                                        </div>
+                                        <div class="input-group">
+                                            <input type="radio" name="gender" value="Ayol">Ayol
                                         </div>
                                     </div>
 

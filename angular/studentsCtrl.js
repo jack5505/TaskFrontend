@@ -24,8 +24,11 @@ app.controller('studentsCtrl', function ($scope, $http, NgTableParams) {
 
     $scope.addPhones = function(){
             if($scope.ph.length >= 1){
-                 $scope.phone1.push($scope.ph);
-                 $scope.ph = "";
+                var temp = {
+                 phoneName:$scope.ph
+                }
+                $scope.phone1.push(temp);
+                $scope.ph = ""
             }
     };
     $scope.removephones = function(x){
@@ -58,6 +61,7 @@ app.controller('studentsCtrl', function ($scope, $http, NgTableParams) {
                 'Content-type': 'application/json',
             }
         }).then(function (response) {
+            console.log(response.data);
             $scope.students = response.data;
             $scope.studentTable = new NgTableParams({
                     page:1,
@@ -80,17 +84,22 @@ app.controller('studentsCtrl', function ($scope, $http, NgTableParams) {
 //    create new whs
     $scope.createStudent = function () {
         if($scope.ph.length >= 1){
-        $scope.phone1.push($scope.ph);
+            var temp = {
+                phoneName:$scope.ph
+            }
+            $scope.phone1.push(temp);
+            $scope.ph = "";
         }
         var data = {
             firstname: $scope.firstname,
             lastname: $scope.lastname,
-            age: $scope.age,
+            age: $scope.age.value,
             address: $scope.address,
             phone: $scope.phone1,
             groups: $scope.selectedgroup.id,
+            userId:$scope.userId,
         };
-
+        console.log(data);
         $http({
             url: $scope.baseUrl,
             dataType: 'json',
