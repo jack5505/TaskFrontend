@@ -24,24 +24,12 @@
                     </div>
                     <!-- /.box-header -->
                     <div class="box-body">
-                        <table class="table table-bordered table-hover" ng-table="studentTable">
-                            <thead>
-                            <tr>
-                                <th>N</th>
-                                <th>Ismi</th>
-                                <th>Familiyasi</th>
-                                <th>Tug`ilgan sana</th>
-                                <th>Manzili</th>
-                                <th>Guruh</th>
-                                <th>Telefon raqami</th>
-                                <th>O`zgartirishlar</th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            <tr ng-repeat="whs in students">
-                                <td>{{$index + 1}}</td>
-                                <td>{{whs.firstname}}</td>
-                                <td>{{whs.lastname}}</td>
+                        <table ng-table ="studentTable" class="table table-bordered table-hover">
+
+                            <tr ng-repeat="whs in $data">
+                                <td data-title="'№'">{{$index + 1}}</td>
+                                <td data-title="'Ismi'">{{whs.firstname}}</td>
+                                <td data-title="'Familiyasi'">{{whs.lastname}}</td>
                                 <td>{{whs.age}}</td>
                                 <td>{{whs.address}}</td>
                                 <td>{{whs.groups}}</td>
@@ -58,8 +46,43 @@
                                     ><span class="glyphicon glyphicon-pencil"></span></button>
                                 </td>
                             </tr>
-                            </tbody>
                         </table>
+                        <!--<table class="table table-bordered table-hover" ng-table="studentTable">-->
+                            <!--<thead>-->
+                            <!--<tr>-->
+                                <!--<th>N</th>-->
+                                <!--<th>Ismi</th>-->
+                                <!--<th>Familiyasi</th>-->
+                                <!--<th>Tug`ilgan sana</th>-->
+                                <!--<th>Manzili</th>-->
+                                <!--<th>Guruh</th>-->
+                                <!--<th>Telefon raqami</th>-->
+                                <!--<th>O`zgartirishlar</th>-->
+                            <!--</tr>-->
+                            <!--</thead>-->
+                            <!--<tbody>-->
+                            <!--<tr ng-repeat="whs in students">-->
+                                <!--<td>{{$index + 1}}</td>-->
+                                <!--<td>{{whs.firstname}}</td>-->
+                                <!--<td>{{whs.lastname}}</td>-->
+                                <!--<td>{{whs.age}}</td>-->
+                                <!--<td>{{whs.address}}</td>-->
+                                <!--<td>{{whs.groups}}</td>-->
+                                <!--<td>-->
+                                    <!--<p ng-repeat="tel in whs.phone">-->
+                                        <!--{{tel}}-->
+                                    <!--</p>-->
+                                <!--</td>-->
+                                <!--<td>-->
+                                    <!--<button class="btn btn-danger btn-xs"><span-->
+                                            <!--class="glyphicon glyphicon-trash"></span></button>-->
+                                    <!--<button class="btn btn-primary btn-xs" ng-click="editBtn(whs.whsId)"-->
+                                            <!--data-toggle="modal" data-target="#whsModal"-->
+                                    <!--&gt;<span class="glyphicon glyphicon-pencil"></span></button>-->
+                                <!--</td>-->
+                            <!--</tr>-->
+                            <!--</tbody>-->
+                        <!--</table>-->
                     </div>
                     <!-- /.box-body -->
                 </div>

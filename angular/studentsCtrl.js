@@ -13,7 +13,7 @@ app.directive('ngFiles', ['$parse', function ($parse) {
     }
 }]);
 
-app.controller('studentsCtrl', function ($scope, $http) {
+app.controller('studentsCtrl', function ($scope, $http, NgTableParams) {
     $scope.phone1 = [];
     $scope.selectedgroup = "";
     $scope.groups = "";
@@ -43,7 +43,6 @@ app.controller('studentsCtrl', function ($scope, $http) {
             }
         }).then(function (response) {
             $scope.groups = response.data;
-            console.log($scope.phone1);
         });
     };
 
@@ -60,8 +59,18 @@ app.controller('studentsCtrl', function ($scope, $http) {
             }
         }).then(function (response) {
             $scope.students = response.data;
-            $scope.studentTable = new NgTableParams({},{dataset:response.data});
-            console.log(response.data);
+            $scope.studentTable = new NgTableParams({
+                    page:1,
+                    count:5
+                }, {
+                    getData: function(params) {
+                        params.total($scope.students.length);
+                        return $scope.students.slice((params.page() - 1) * params.count(), params.page() * params.count());
+                    }
+                }
+            );
+
+
         }, function (error) {
             alert('Error in get WholeSalers');
         });
