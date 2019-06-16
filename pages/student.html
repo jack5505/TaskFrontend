@@ -25,13 +25,14 @@
                     <!-- /.box-header -->
                     <div class="box-body">
                         <table ng-table ="studentTable" class="table table-bordered table-hover">
-                            <tr ng-repeat="whs in $data">
-                                <td data-title="'№'">{{$index + 1}}</td>
+                            <tr ng-repeat="whs in $data" ng-if="whs.deleted == false">
+                                <td data-title="'№'">{{whs.id}}</td>
                                 <td data-title="'Ismi'">{{whs.firstname}}</td>
                                 <td data-title="'Familiyasi'">{{whs.lastname}}</td>
                                 <td data-title="'Tug`ilgan sana'">{{whs.birthDate}}</td>
                                 <td data-title="'Manzil'">{{whs.address}}</td>
                                 <td data-title="'Guruh'">{{whs.groups}}</td>
+                                <td ng-if="moderatoView" data-title="'Yaratgan Foydalanuvchi'">{{whs.createdUserName}}</td>
                                 <td data-title="'Telefon'">
                                     <p ng-repeat="tel in whs.phone">
                                         {{tel.phoneName}}
@@ -43,6 +44,20 @@
                                     <button class="btn btn-primary btn-xs" ng-click="editBtn(whs.id)"
                                             data-toggle="modal" data-target="#whsModal"
                                     ><span class="glyphicon glyphicon-pencil"></span></button>
+                                </td>
+                            </tr>
+                            <tr ng-repeat="whs in $data" ng-if="whs.deleted == true && moderatoView" style="background-color: red">
+                                <td data-title="'№'">{{whs.id}}</td>
+                                <td data-title="'Ismi'">{{whs.firstname}}</td>
+                                <td data-title="'Familiyasi'">{{whs.lastname}}</td>
+                                <td data-title="'Tug`ilgan sana'">{{whs.birthDate}}</td>
+                                <td data-title="'Manzil'">{{whs.address}}</td>
+                                <td data-title="'Guruh'">{{whs.groups}}</td>
+                                <td ng-if="moderatoView" data-title="'Yaratgan Foydalanuvchi'">{{whs.createdUserName}}</td>
+                                <td data-title="'Telefon'">
+                                    <p ng-repeat="tel in whs.phone">
+                                        {{tel.phoneName}}
+                                    </p>
                                 </td>
                             </tr>
                         </table>

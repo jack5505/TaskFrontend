@@ -31,10 +31,7 @@
                                 <td data-title="'Ro`l'">{{x.role}}</td>
                                 <td data-title="'Amallar'">
                                     <button class="btn btn-danger btn-xs"><span
-                                            class="glyphicon glyphicon-trash" ng-click="deletModerator(whs.id)" data-toggle="modal" data-target="#deletModal"></span></button>
-                                    <button class="btn btn-primary btn-xs" ng-click="editModerator(whs.id)"
-                                            data-toggle="modal" data-target="#whsModal"
-                                    ><span class="glyphicon glyphicon-pencil"></span></button>
+                                            class="glyphicon glyphicon-trash" ng-click="deletModerator(x.id,x.fio)" data-toggle="modal" data-target="#deletModal"></span></button>
                                 </td>
                             </tr>
                         </table>
@@ -56,12 +53,12 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal">&times;</button>
-                    <h4 class="modal-title">Haqiqatan o`chirmoqchimisiz {{deletedName}}</h4>
+                    <h4 class="modal-title">Haqiqatan o`chirmoqchimisiz {{deletedMod}}</h4>
                 </div>
                 <div class="modal-body">
                     <div class="row">
                         <div class="form-group">
-                            <input type="button" value="Xa" ng-click="deletIt()"  class="btn btn-success" data-dismiss="modal" >
+                            <input type="button" value="Xa" ng-click="deletMod()"  class="btn btn-success" data-dismiss="modal" >
                             <input type="button" value="Yo`q" class="btn btn-danger" data-dismiss="modal">
                         </div>
                     </div>

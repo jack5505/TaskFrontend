@@ -1,8 +1,28 @@
 app.controller('moderatorCtrl',function ($scope,$http) {
     $scope.md = [];
     $scope.error = false;
-    $scope.deletModerator = function () {
-
+    $scope.deletedMod = "";
+    $scope.id = "";
+    $scope.deletMod = function(){
+        var data = {
+            id:$scope.id
+        };
+        $http({
+            url:$scope.baseUrl+"user",
+            method:'DELETE',
+            data:data,
+            headers:{
+                'Content-type':'application/json'
+            },
+            transformResponse: angular.identity
+        }).then(function (response) {
+            alert("Muvofaqiyatli o`chirildi");
+            $scope.getModerator();
+        });
+    }
+    $scope.deletModerator = function (x,fio) {
+            $scope.id = x;
+            $scope.deletedMod = fio;
     }
     $scope.editModerator = function () {
 
