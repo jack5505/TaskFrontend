@@ -17,9 +17,11 @@ app.controller('studentsCtrl', function ($scope, $http, NgTableParams) {
     $scope.phone1 = [];
     $scope.selectedgroup = "";
     $scope.groups = "";
-    $scope.age = {
-        value: new Date(2019, 1,1)
-    }
+    $scope.deletedId = "";
+    // $scope.age = {
+    //     value: new Date(2019, 1,1)
+    // }
+    $scope.age = "01.01.2019";
 
 
     $scope.addPhones = function(){
@@ -90,14 +92,16 @@ app.controller('studentsCtrl', function ($scope, $http, NgTableParams) {
             $scope.phone1.push(temp);
             $scope.ph = "";
         }
+        console.log("PleaseCheckIt" + $scope.age);
         var data = {
             firstname: $scope.firstname,
             lastname: $scope.lastname,
-            age: $scope.age.value,
+            birthDate: $scope.age,
             address: $scope.address,
             phone: $scope.phone1,
             groups: $scope.selectedgroup.id,
             userId:$scope.userId,
+            gender:$scope.sex,
         };
         console.log(data);
         $http({
@@ -122,7 +126,7 @@ app.controller('studentsCtrl', function ($scope, $http, NgTableParams) {
     $scope.clearWhsModal = function () {
         $scope.firstname = "";
         $scope.lastname = "";
-        $scope.age = "";
+        $scope.age = "10.01.1993";
         $scope.address = "";
         $scope.phone1 = [];
 
@@ -152,6 +156,50 @@ app.controller('studentsCtrl', function ($scope, $http, NgTableParams) {
     $scope.sendFile = function () {
         alert("hi");
         console.log($scope.files);
+    }
+    $scope.delete = function (x) {
+        $scope.deletedId = x;
+        for(var i = 0 ; i < $scope.students.length;i++){
+            if($scope.students[i].id == x){
+                $scope.deletedName = $scope.students[i].firstname;
+            }
+        }
+    }
+    $scope.deletIt = function () {
+        var data = {
+            userId:$scope.userId,
+            studentId:$scope.deletedId
+        };
+        $http({
+            url: $scope.baseUrl,
+            dataType: 'json',
+            method: 'DELETE',
+            data: data,
+            headers: {
+                'Content-type': 'application/json',
+            },
+            transformResponse: angular.identity
+        }).then(function (response) {
+            $scope.getWholeSalers();
+            alert("Muvofaqiyatli o`chirildi");
+        }, function (error) {
+            alert('Error in add whs');
+        });
+
+    }
+    $scope.editBtn =function (id) {
+        console.log("YES");
+        console.log(id);
+        var data = {
+            id:id
+        };
+        var config = {
+          data: data,
+          headers:{'Accept':'application/json'}
+        };
+        $http.get($scope.baseUrl,config).then(function (response) {
+            console.log(response.data);
+        })
     }
 
 });
