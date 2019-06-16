@@ -53,7 +53,9 @@ app.controller('mainCtrl', function ($scope, $http) {
 
 //    change content url
     $scope.changeContentUrl = function (url, index) {
+        console.log(url);
         $scope.contentUrl = 'pages/' + url + ".html";
+        console.log($scope.contentUrl);
         $scope.sideMenuActive[$scope.sideMenuActiveIndex] = "";
         $scope.sideMenuActiveIndex = index;
         $scope.sideMenuActive[$scope.sideMenuActiveIndex] = "active";
