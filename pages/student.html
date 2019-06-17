@@ -26,7 +26,7 @@
                     <div class="box-body">
                         <table ng-table ="studentTable" class="table table-bordered table-hover">
                             <tr ng-repeat="whs in $data" ng-if="whs.deleted == false">
-                                <td data-title="'№'">{{whs.id}}</td>
+                                <td data-title="'№'">{{$index + 1}}</td>
                                 <td data-title="'Ismi'">{{whs.firstname}}</td>
                                 <td data-title="'Familiyasi'">{{whs.lastname}}</td>
                                 <td data-title="'Tug`ilgan sana'">{{whs.birthDate}}</td>
@@ -47,7 +47,7 @@
                                 </td>
                             </tr>
                             <tr ng-repeat="whs in $data" ng-if="whs.deleted == true && moderatoView" style="background-color: red">
-                                <td data-title="'№'">{{whs.id}}</td>
+                                <td data-title="'№'">{{$index + 1}}</td>
                                 <td data-title="'Ismi'">{{whs.firstname}}</td>
                                 <td data-title="'Familiyasi'">{{whs.lastname}}</td>
                                 <td data-title="'Tug`ilgan sana'">{{whs.birthDate}}</td>
@@ -61,42 +61,6 @@
                                 </td>
                             </tr>
                         </table>
-                        <!--<table class="table table-bordered table-hover" ng-table="studentTable">-->
-                            <!--<thead>-->
-                            <!--<tr>-->
-                                <!--<th>N</th>-->
-                                <!--<th>Ismi</th>-->
-                                <!--<th>Familiyasi</th>-->
-                                <!--<th>Tug`ilgan sana</th>-->
-                                <!--<th>Manzili</th>-->
-                                <!--<th>Guruh</th>-->
-                                <!--<th>Telefon raqami</th>-->
-                                <!--<th>O`zgartirishlar</th>-->
-                            <!--</tr>-->
-                            <!--</thead>-->
-                            <!--<tbody>-->
-                            <!--<tr ng-repeat="whs in students">-->
-                                <!--<td>{{$index + 1}}</td>-->
-                                <!--<td>{{whs.firstname}}</td>-->
-                                <!--<td>{{whs.lastname}}</td>-->
-                                <!--<td>{{whs.age}}</td>-->
-                                <!--<td>{{whs.address}}</td>-->
-                                <!--<td>{{whs.groups}}</td>-->
-                                <!--<td>-->
-                                    <!--<p ng-repeat="tel in whs.phone">-->
-                                        <!--{{tel}}-->
-                                    <!--</p>-->
-                                <!--</td>-->
-                                <!--<td>-->
-                                    <!--<button class="btn btn-danger btn-xs"><span-->
-                                            <!--class="glyphicon glyphicon-trash"></span></button>-->
-                                    <!--<button class="btn btn-primary btn-xs" ng-click="editBtn(whs.whsId)"-->
-                                            <!--data-toggle="modal" data-target="#whsModal"-->
-                                    <!--&gt;<span class="glyphicon glyphicon-pencil"></span></button>-->
-                                <!--</td>-->
-                            <!--</tr>-->
-                            <!--</tbody>-->
-                        <!--</table>-->
                     </div>
                     <!-- /.box-body -->
                 </div>
@@ -204,16 +168,6 @@
                                             <span class="input-group-addon"><i class="fa fa-group"></i></span>
                                         </div>
                                     </div>
-
-                                    <!--<div class="form-group">-->
-                                        <!--<label for="input06">Tug`ilgan sana</label>-->
-                                        <!--<div class="input-group">-->
-                                            <!--<input id="input06" type="date" class="form-control"-->
-                                                   <!--placeholder="yyyy-MM-dd"-->
-                                                   <!--ng-model="age.value">-->
-                                            <!--<span class="input-group-addon"><i class="fa fa-phone"></i></span>-->
-                                        <!--</div>-->
-                                        <!---->
                                         <div class="form-group">
                                             <label for="input06">Tug`ilgan sana</label>
                                             <div class="input-group">
@@ -231,9 +185,7 @@
                                                    ng-model="ph">
                                             <span class="input-group-addon"><button class="fa fa-phone" ng-click="addPhones()"></button></span>
                                         </div>
-                                        <!--<ul>-->
-                                        <!--<li class="form-control" ng-repeat="x in phone1">{{x}} <button ng-click="removephones($index)">X</button></li>-->
-                                        <!--</ul>-->
+
 
                                     </div>
 

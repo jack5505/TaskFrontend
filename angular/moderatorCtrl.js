@@ -1,4 +1,4 @@
-app.controller('moderatorCtrl',function ($scope,$http) {
+app.controller('moderatorCtrl',function ($scope,$http,NgTableParams,$filter,$q) {
     $scope.md = [];
     $scope.error = false;
     $scope.deletedMod = "";
@@ -64,7 +64,27 @@ app.controller('moderatorCtrl',function ($scope,$http) {
             }
         }).then(function (response) {
         $scope.md = response.data;
-        console.log(response.data);
+            $scope.moderatorTables = new NgTableParams({
+                page: 1,
+                count: 5
+            }, {
+                total: $scope.md.length,
+                getData: function (params) {
+                    console.log("createTable");
+                    console.log(params);
+                    console.log($scope.md);
+                    $scope.data = params.sorting() ? $filter('orderBy')($scope.md, params.orderBy()) : $scope.md;
+
+                    $scope.data = params.filter() ? $filter('filter')($scope.data, params.filter()) : $scope.data;
+
+                    $scope.data = $scope.data.slice((params.page() - 1) * params.count(), params.page() * params.count());
+                    console.log($scope.data);
+                    var defer = $q.defer();
+                    defer.resolve($scope.data);
+                }
+
+            });
+
         })
     }
     $scope.getModerator();

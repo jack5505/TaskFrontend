@@ -23,11 +23,11 @@
                     </div>
                     <!-- /.box-header -->
                     <div class="box-body">
-                        <table ng-table ="studentTable" class="table table-bordered table-hover">
-                            <tr ng-repeat="x in md">
+                        <table ng-table ="moderatorTables" class="table table-bordered table-hover">
+                            <tr ng-repeat="x in data">
                                 <td data-title="'№'">{{$index + 1}}</td>
-                                <td data-title="'F.I.O'">{{x.fio}}</td>
-                                <td data-title="'Login'">{{x.username}}</td>
+                                <td data-title="'F.I.O'" sortable="'fio'" filter="{'fio':'text'}">{{x.fio}}</td>
+                                <td data-title="'Login'" sortable="'username'" filter="{'username':'text'}">{{x.username}}</td>
                                 <td data-title="'Ro`l'">{{x.role}}</td>
                                 <td data-title="'Amallar'">
                                     <button class="btn btn-danger btn-xs"><span

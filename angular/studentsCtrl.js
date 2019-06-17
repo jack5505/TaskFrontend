@@ -13,7 +13,7 @@ app.directive('ngFiles', ['$parse', function ($parse) {
     }
 }]);
 
-app.controller('studentsCtrl', function ($scope, $http, NgTableParams) {
+app.controller('studentsCtrl', function ($scope, $http, NgTableParams,$filter,$q) {
     $scope.phone1 = [];
     $scope.selectedgroup = "";
     $scope.groups = "";
@@ -76,7 +76,6 @@ app.controller('studentsCtrl', function ($scope, $http, NgTableParams) {
                     }
                 }
             );
-
 
         }, function (error) {
             alert('Error in get Students');
