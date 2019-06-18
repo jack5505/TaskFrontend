@@ -34,7 +34,19 @@
                                 <th>Manzil</th>
                                 <th>Guruh</th>
                                 <th>Telefon</th>
+                                <th>Yaratgan Foydalanuvchi</th>
                                 <th>Sozlash</th>
+                            </tr>
+                            <tr>
+                                <td></td>
+                                <td><input type="text" class="input-group" ng-keyup="generate()" ng-model="searchName"/></td>
+                                <!--<td><input type="text" class="input-group" ng-keyup="generate()" ng-model="searchSurname"/></td>-->
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
                             </tr>
                             </thead>
                             <tbody>
@@ -64,7 +76,7 @@
                         <div class="form-group">
                             <nav aria-label="Page navigation example">
                                 <ul class="pagination" ng-repeat="i in peginationSize">
-                                    <li class="page-item"><a href="#" class="page-link" ng-click="getByPagination($index)">{{i}}</a></li>
+                                    <li class="page-item"><a href="#" class="page-link" ng-click="getByPagination($index,searchName)">{{i}}</a></li>
                                 </ul>
                             </nav>
 

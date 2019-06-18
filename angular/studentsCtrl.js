@@ -55,34 +55,6 @@ app.controller('studentsCtrl', function ($scope, $http, NgTableParams,$filter,$q
     };
 
 
-    // $scope.Pharmacies = [];
-    $scope.getWholeSalers = function () {
-        $http({
-            url: $scope.baseUrl,
-            dataType: 'json',
-            method: 'GET',
-            data: '',
-            headers: {
-                'Content-type': 'application/json',
-            }
-        }).then(function (response) {
-            console.log(response.data);
-            console.log(response.data.length);
-            $scope.total = response.data.length;
-            $scope.uzunliki = $scope.total / 5;
-            if($scope.total % 5 >= 1)
-                $scope.uzunliki ++;
-            for (var i = 1; i <= $scope.uzunliki;i++){
-                $scope.peginationSize.push(i);
-            }
-
-
-        }, function (error) {
-            alert('Error in get Students');
-        });
-    };
-    $scope.getWholeSalers();
-
 //    create new whs
     $scope.createStudent = function (method,id) {
         if($scope.ph != undefined){
@@ -215,30 +187,54 @@ app.controller('studentsCtrl', function ($scope, $http, NgTableParams,$filter,$q
             $scope.address = response.data.address;
             $scope.age = response.data.birthDate;
             $scope.selectedgroup.groupName = response.data.groups;
-        })
-    }
+        });
+    };
     $scope.update = function () {
 
 
     }
-    $scope.getByPagination = function (x) {
+    //Get by pagination
+    $scope.getByPagination = function (x,name) {
+        if(name == undefined){
+            name = "";
+            $scope.searchName = "";
+        }else{
+            $scope.searchName = name;
+        }
             var send = {
                 page: x,
-                size:5
+                size:5,
+                name:name
             };
             var config = {
                 data: send,
                 headers:{'Accept':'application/json'}
             };
-            $http.get("http://localhost:8080/?page="+x+"&"+"size="+5).then(function (response) {
-               $scope.studentsData = [];
-                for(var i = 0 ; i < response.data.length;i++){
-                    if(response.data[i].deleted == false){
-                        $scope.studentsData.push(response.data[i]);
-                    }
-                }
-            })
-    }
+            console.log(name);
+            $http.get("http://localhost:8080/?page="+x+"&"+"size="+5+"&name="+$scope.searchName).then(function (response) {
+                $scope.studentsData = response.data;
+                console.log(response.data[0].totalLike);
+                $scope.generatePaginationButtons(response.data[0].totalLike);
+            });
+    };
 
+    //Generate qiladi buttonlarni
+    $scope.generatePaginationButtons = function(x){
+        $scope.peginationSize = [];
+        $scope.uzunliki = x / 5;
+        if(x % 5 >= 1)
+            $scope.uzunliki ++;
+        for (var i = 1; i <= $scope.uzunliki;i++){
+            $scope.peginationSize.push(i);
+        };
+    };
+
+    //filter box for firstname and  surname
+    $scope.generate = function () {
+        console.log("filter");
+        console.log($scope.searchName);
+        $scope.getByPagination(0,$scope.searchName);
+    };
+    $scope.getByPagination(0,"");
 
 });
