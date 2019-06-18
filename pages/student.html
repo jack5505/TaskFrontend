@@ -24,8 +24,21 @@
                     </div>
                     <!-- /.box-header -->
                     <div class="box-body">
-                        <table ng-table ="studentTable" class="table table-bordered table-hover">
-                            <tr ng-repeat="whs in $data" ng-if="whs.deleted == false">
+                        <table class="table table-bordered table-hover">
+                            <thead>
+                            <tr>
+                                <th>№</th>
+                                <th>Ismi</th>
+                                <th>Familiyasi</th>
+                                <th>Tug`ilgan sana</th>
+                                <th>Manzil</th>
+                                <th>Guruh</th>
+                                <th>Telefon</th>
+                                <th>Sozlash</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr ng-repeat="whs in studentsData" ng-if="whs.deleted == false">
                                 <td data-title="'№'">{{$index + 1}}</td>
                                 <td data-title="'Ismi'">{{whs.firstname}}</td>
                                 <td data-title="'Familiyasi'">{{whs.lastname}}</td>
@@ -38,7 +51,7 @@
                                         {{tel.phoneName}}
                                     </p>
                                 </td>
-                                <td data-title="'Amallar'">
+                                <td>
                                     <button class="btn btn-danger btn-xs"><span
                                             class="glyphicon glyphicon-trash" ng-click="delete(whs.id)" data-toggle="modal" data-target="#deletModal"></span></button>
                                     <button class="btn btn-primary btn-xs" ng-click="editBtn(whs.id)"
@@ -46,21 +59,16 @@
                                     ><span class="glyphicon glyphicon-pencil"></span></button>
                                 </td>
                             </tr>
-                            <tr ng-repeat="whs in $data" ng-if="whs.deleted == true && moderatoView" style="background-color: red">
-                                <td data-title="'№'">{{$index + 1}}</td>
-                                <td data-title="'Ismi'">{{whs.firstname}}</td>
-                                <td data-title="'Familiyasi'">{{whs.lastname}}</td>
-                                <td data-title="'Tug`ilgan sana'">{{whs.birthDate}}</td>
-                                <td data-title="'Manzil'">{{whs.address}}</td>
-                                <td data-title="'Guruh'">{{whs.groups}}</td>
-                                <td ng-if="moderatoView" data-title="'Yaratgan Foydalanuvchi'">{{whs.createdUserName}}</td>
-                                <td data-title="'Telefon'">
-                                    <p ng-repeat="tel in whs.phone">
-                                        {{tel.phoneName}}
-                                    </p>
-                                </td>
-                            </tr>
+                            </tbody>
                         </table>
+                        <div class="form-group">
+                            <nav aria-label="Page navigation example">
+                                <ul class="pagination" ng-repeat="i in peginationSize">
+                                    <li class="page-item"><a href="#" class="page-link" ng-click="getByPagination($index)">{{i}}</a></li>
+                                </ul>
+                            </nav>
+
+                        </div>
                     </div>
                     <!-- /.box-body -->
                 </div>
@@ -162,9 +170,8 @@
                                     </div>
 
                                     <div class="form-group">
-                                        <label for="input022">Guruh</label>
                                         <div class="input-group">
-                                            <select class="form-control"  ng-model="selectedgroup"  ng-options="x.groupName for x in groups"></select>
+                                            <select class="form-control" ng-init="selectedgroup = groups[0]" ng-model="selectedgroup"  ng-options="x.groupName for x in groups"></select>
                                             <span class="input-group-addon"><i class="fa fa-group"></i></span>
                                         </div>
                                     </div>

@@ -19,6 +19,8 @@ app.controller('studentsCtrl', function ($scope, $http, NgTableParams,$filter,$q
     $scope.groups = "";
     $scope.deletedId = "";
     $scope.saveOrUpdate = -1;
+    $scope.peginationSize = [];
+    $scope.studentsData = [];
     // $scope.age = {
     //     value: new Date(2019, 1,1)
     // }
@@ -65,17 +67,15 @@ app.controller('studentsCtrl', function ($scope, $http, NgTableParams,$filter,$q
             }
         }).then(function (response) {
             console.log(response.data);
-            $scope.students = response.data;
-            $scope.studentTable = new NgTableParams({
-                    page:1,
-                    count:5
-                }, {
-                    getData: function(params) {
-                        params.total($scope.students.length);
-                        return $scope.students.slice((params.page() - 1) * params.count(), params.page() * params.count());
-                    }
-                }
-            );
+            console.log(response.data.length);
+            $scope.total = response.data.length;
+            $scope.uzunliki = $scope.total / 5;
+            if($scope.total % 5 >= 1)
+                $scope.uzunliki ++;
+            for (var i = 1; i <= $scope.uzunliki;i++){
+                $scope.peginationSize.push(i);
+            }
+
 
         }, function (error) {
             alert('Error in get Students');
@@ -220,6 +220,24 @@ app.controller('studentsCtrl', function ($scope, $http, NgTableParams,$filter,$q
     $scope.update = function () {
 
 
+    }
+    $scope.getByPagination = function (x) {
+            var send = {
+                page: x,
+                size:5
+            };
+            var config = {
+                data: send,
+                headers:{'Accept':'application/json'}
+            };
+            $http.get("http://localhost:8080/?page="+x+"&"+"size="+5).then(function (response) {
+               $scope.studentsData = [];
+                for(var i = 0 ; i < response.data.length;i++){
+                    if(response.data[i].deleted == false){
+                        $scope.studentsData.push(response.data[i]);
+                    }
+                }
+            })
     }
 
 
