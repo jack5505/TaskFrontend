@@ -1,0 +1,119 @@
+<div ng-controller="phoneCtrl">
+    <section class="content-header">
+        <h1>
+            Guruhlar
+            <small>Boshqaruv paneli</small>
+        </h1>
+    </section>
+    <!-- Main content -->
+    <section class="content" style="min-height: 500px">
+        <div class="row">
+            <div class="col-xs-12">
+                <div class="box">
+                    <div class="box-header">
+                        <div class="row" style="margin-top: 10px">
+                            <div class="col-sm-6">
+                                <small style="font-size: 18px;">Ro'yhatga olingan Guruhlar</small>
+                            </div>
+                            <div class="col-sm-6">
+                                <button data-toggle="modal" data-target="#groupModal" class="btn btn-success btn-sm"
+                                        style="float: right;" ng-click="getGroups()"><i class="fa  fa-user-plus"> </i></button>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- /.box-header -->
+                    <div class="box-body">
+                        <table class="table table-bordered table-hover">
+                            <thead>
+                            <tr>
+                                <th>№</th>
+                                <th>Guruh</th>
+                                <th>Sozlash</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr ng-repeat="whs in groupData">
+                                <td>{{$index + 1}}</td>
+                                <td>{{whs.groupName}}</td>
+                                <td>
+                                    <button class="btn btn-danger btn-xs"><span
+                                            class="glyphicon glyphicon-trash" ng-click="delete(whs.id)" data-toggle="modal" data-target="#deletModal"></span></button>
+                                    <button class="btn btn-primary btn-xs" ng-click="editBtn(whs.id)"
+                                            data-toggle="modal" data-target="#whsModal"
+                                    ><span class="glyphicon glyphicon-pencil"></span></button>
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <!-- /.box-body -->
+                </div>
+                <!-- /.box -->
+
+            </div>
+            <!-- /.col -->
+        </div>
+        <!-- /.row -->
+        <!-- Small boxes (Stat box) -->
+    </section>
+
+    <!-- Delete Modal -->
+    <div class="modal fade" id="deletModal" role="dialog">
+        <div class="modal-dialog modal-sm">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Haqiqatan o`chirmoqchimisiz {{deletedMod}}</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="form-group">
+                            <input type="button" value="Xa" ng-click="deletMod()"  class="btn btn-success" data-dismiss="modal" >
+                            <input type="button" value="Yo`q" class="btn btn-danger" data-dismiss="modal">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Add and edit Modal -->
+    <div class="modal" id="groupModal" role="dialog">
+        <div class="modal-dialog modal-md">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Yangi Gruppa qoshish</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="">
+                            <form role="form">
+                                <div class="box-body">
+                                    <div class="form-group">
+                                        <label for="groups123">Guruh</label>
+                                        <div class="input-group">
+                                            <input id="groups123" type="text" class="form-control"
+                                                   placeholder="942-15"
+                                                   ng-model="inputgroup">
+                                            <span class="input-group-addon"><i class="fa fa-font"></i></span>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button ng-click="creatGroup()" type="button" class="btn btn-success"
+                            data-dismiss="modal">{{btnName}}
+                    </button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+
+</div>
