@@ -36,10 +36,8 @@
                                 <td>{{$index + 1}}</td>
                                 <td>{{whs.groupName}}</td>
                                 <td>
-                                    <button class="btn btn-danger btn-xs"><span
-                                            class="glyphicon glyphicon-trash" ng-click="delete(whs.id)" data-toggle="modal" data-target="#deletModal"></span></button>
-                                    <button class="btn btn-primary btn-xs" ng-click="editBtn(whs.id)"
-                                            data-toggle="modal" data-target="#whsModal"
+                                    <button class="btn btn-primary btn-xs" ng-click="editBtn($index)"
+                                            data-toggle="modal" data-target="#groupModal"
                                     ><span class="glyphicon glyphicon-pencil"></span></button>
                                 </td>
                             </tr>
@@ -58,24 +56,24 @@
     </section>
 
     <!-- Delete Modal -->
-    <div class="modal fade" id="deletModal" role="dialog">
-        <div class="modal-dialog modal-sm">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal">&times;</button>
-                    <h4 class="modal-title">Haqiqatan o`chirmoqchimisiz {{deletedMod}}</h4>
-                </div>
-                <div class="modal-body">
-                    <div class="row">
-                        <div class="form-group">
-                            <input type="button" value="Xa" ng-click="deletMod()"  class="btn btn-success" data-dismiss="modal" >
-                            <input type="button" value="Yo`q" class="btn btn-danger" data-dismiss="modal">
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+    <!--<div class="modal fade" id="deletModal" role="dialog">-->
+        <!--<div class="modal-dialog modal-sm">-->
+            <!--<div class="modal-content">-->
+                <!--<div class="modal-header">-->
+                    <!--<button type="button" class="close" data-dismiss="modal">&times;</button>-->
+                    <!--<h4 class="modal-title">Haqiqatan o`chirmoqchimisiz {{deletedMod}}</h4>-->
+                <!--</div>-->
+                <!--<div class="modal-body">-->
+                    <!--<div class="row">-->
+                        <!--<div class="form-group">-->
+                            <!--<input type="button" value="Xa" ng-click="deletMod()"  class="btn btn-success" data-dismiss="modal" >-->
+                            <!--<input type="button" value="Yo`q" class="btn btn-danger" data-dismiss="modal">-->
+                        <!--</div>-->
+                    <!--</div>-->
+                <!--</div>-->
+            <!--</div>-->
+        <!--</div>-->
+    <!--</div>-->
 
     <!-- Add and edit Modal -->
     <div class="modal" id="groupModal" role="dialog">
@@ -106,7 +104,7 @@
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button ng-click="creatGroup()" type="button" class="btn btn-success"
+                    <button ng-click="createGroups()" type="button" class="btn btn-success"
                             data-dismiss="modal">{{btnName}}
                     </button>
                 </div>

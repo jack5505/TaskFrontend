@@ -18,4 +18,25 @@ app.controller('phoneCtrl',function ($http,$scope) {
     };
     $scope.getAllGroupsToList();
 
+    $scope.editBtn = function (id) {
+        $scope.inputgroup = $scope.groupData[id].groupName;
+    };
+    $scope.createGroups = function () {
+        var data = {
+            groupName:$scope.inputgroup
+        };
+        $http({
+            url:$scope.baseUrl+"groups",
+            dataType:'json',
+            method:'POST',
+            data:data,
+            headers:{
+                'Content-type':'application/json',
+            },
+            transformResponse: angular.identity
+        }).then(function (response) {
+            $scope.getAllGroupsToList();
+        })
+    }
+
 })
