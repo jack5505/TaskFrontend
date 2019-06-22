@@ -13,7 +13,8 @@ app.directive('ngFiles', ['$parse', function ($parse) {
     }
 }]);
 
-app.controller('studentsCtrl', function ($scope, $http, NgTableParams,$filter,$q) {
+
+app.controller('studentsCtrl', function ($scope, $http) {
     $scope.phone1 = [];
     $scope.selectedgroup = "";
     $scope.groups = "";
@@ -21,6 +22,14 @@ app.controller('studentsCtrl', function ($scope, $http, NgTableParams,$filter,$q
     $scope.saveOrUpdate = -1;
     $scope.peginationSize = [];
     $scope.studentsData = [];
+    $scope.filter1 = "";
+    $scope.filter2 = "";
+    $scope.filter3 = "";
+    $scope.filter4 = "";
+    $scope.filter5 = "";
+    $scope.filter6 = "";
+    $scope.filter7 = "";
+
     // $scope.age = {
     //     value: new Date(2019, 1,1)
     // }
@@ -88,8 +97,8 @@ app.controller('studentsCtrl', function ($scope, $http, NgTableParams,$filter,$q
             },
             transformResponse: angular.identity
         }).then(function (response) {
-            $scope.getWholeSalers();
             $scope.clearWhsModal();
+            $scope.getByPagination(0,"");
             alert(response.data);
         }, function (error) {
             alert('Error in add whs');
@@ -105,15 +114,111 @@ app.controller('studentsCtrl', function ($scope, $http, NgTableParams,$filter,$q
         $scope.phone1 = [];
         $scope.saveOrUpdate = -1;
     };
-    $scope.btnWhsCtrl = function () {
-        if($scope.saveOrUpdate == -1){
-        $scope.createStudent('POST',$scope.saveOrUpdate);
+    $scope.btnWhsCtrl = function ()
+    {
+        //Filter for input form
+
+
+
+        if($scope.checkAllFilters()){
+
+            if($scope.saveOrUpdate == -1){
+            $scope.createStudent('POST',$scope.saveOrUpdate);
+            }
+            else{
+            $scope.createStudent('PUT',$scope.saveOrUpdate);
+            }
+            $('#whsModal').modal('hide');
         }
-        else{
-        $scope.createStudent('PUT',$scope.saveOrUpdate);
-        }
+        //  $('#whsModal').modal('hide');
+
+        // if($scope.saveOrUpdate == -1){
+        // $scope.createStudent('POST',$scope.saveOrUpdate);
+        // }
+        // else{
+        // $scope.createStudent('PUT',$scope.saveOrUpdate);
+        // }
 
     };
+    $scope.checkAllFilters = function(){
+        var rt = true;
+        if($scope.firstname == undefined){
+            $scope.filter1 = "Ma`lumotni kiriting";
+            rt &= false;
+        }else{
+            if($scope.firstname.length == 0){
+                $scope.filter1 = "Ma`lumotni kiriting";
+                rt &= false;
+            }
+            else{
+                $scope.filter1 = "";
+                rt &= true;
+            }
+        }
+        if($scope.lastname == undefined){
+            $scope.filter2 = "Ma'lumotni kiriting";
+            rt &= false;
+        }else{
+            if($scope.lastname.length == 0){
+                $scope.filter2 = "Ma'lumotni kiriting";
+                rt &= false;
+            }else{
+                $scope.filter2 = "";
+                rt &= true;
+            }
+        }
+        if($scope.selectedgroup == undefined){
+            $scope.filter3 = "Ma'lumotni kiriting";
+            rt &= false;
+        }else{
+            if($scope.selectedgroup.length == 0){
+                $scope.filter3 = "Ma'lumotni kiriting";
+                rt &= false;
+            }else{
+                $scope.filter3 = "";
+                rt &= true;
+            }
+        }
+        if($scope.age == undefined){
+            $scope.filter4 = "Ma'lumotni kiriting";
+            rt &= false;
+        }else{
+            if($scope.age.length == 0){
+                $scope.filter4 = "Ma'lumotni kiriting";
+                rt &= false;
+            }else{
+                $scope.filter4 = "";
+                rt &= true;
+            }
+        }
+        //filter5
+        if($scope.ph == undefined){
+            $scope.filter5 = "Ma'lumotni kiriting";
+            rt &= false;
+        }else{
+            if($scope.ph.length == 0 && $scope.phone1.length == 0){
+                $scope.filter5 = "Ma'lumotni kiriting";
+                rt &= false;
+            }else{
+                $scope.filter5 = "";
+                rt &= true;
+            }
+        }
+        //address
+        if($scope.address == undefined){
+            $scope.filter6 = "Ma'lumotni kiriting";
+            rt &= false;
+        }else{
+            if($scope.address.length == 0){
+                $scope.filter6 = "Ma'lumotni kiriting";
+                rt &= false;
+            }else{
+                $scope.filter6 = "";
+                rt &= true;
+            }
+        }
+        return rt;
+    }
     $scope.creatGroup = function () {
         alert($scope.inputgroup);
         var data = {
@@ -214,6 +319,7 @@ app.controller('studentsCtrl', function ($scope, $http, NgTableParams,$filter,$q
             $http.get("http://localhost:8080/?page="+x+"&"+"size="+5+"&name="+$scope.searchName).then(function (response) {
                 $scope.studentsData = response.data;
                 console.log(response.data[0].totalLike);
+                console.log(response.data);
                 $scope.generatePaginationButtons(response.data[0].totalLike);
             });
     };
