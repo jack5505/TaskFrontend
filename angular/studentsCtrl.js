@@ -271,7 +271,7 @@ app.controller('studentsCtrl', function ($scope, $http) {
             },
             transformResponse: angular.identity
         }).then(function (response) {
-            $scope.getWholeSalers();
+            $scope.getByPagination(0,"");
             alert("Muvofaqiyatli o`chirildi");
         }, function (error) {
             alert('Error in add whs');
