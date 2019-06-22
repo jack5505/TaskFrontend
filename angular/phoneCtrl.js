@@ -24,7 +24,6 @@ app.controller('phoneCtrl',function ($http,$scope) {
         $scope.id = i;
     };
     $scope.createGroups = function () {
-
         console.log($scope.id);
         if($scope.id == -1)
         {

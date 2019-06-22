@@ -225,7 +225,11 @@ app.controller('studentsCtrl', function ($scope, $http) {
             rt &= true;
         }
         return rt;
-    }
+    };
+    $scope.cleanFilters =function(){
+        if($scope.firstname != undefined)
+            $scope.filter1 = "";
+    };
     $scope.creatGroup = function () {
         alert($scope.inputgroup);
         var data = {
