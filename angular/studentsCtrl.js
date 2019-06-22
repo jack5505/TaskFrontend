@@ -217,6 +217,13 @@ app.controller('studentsCtrl', function ($scope, $http) {
                 rt &= true;
             }
         }
+        if($scope.sex == undefined){
+            $scope.filter7 = "Ma'lumotni kiriting";
+            rt &= false;
+        }else{
+            $scope.filter7 = "";
+            rt &= true;
+        }
         return rt;
     }
     $scope.creatGroup = function () {
