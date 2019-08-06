@@ -1,0 +1,263 @@
+<div ng-controller="employerCtrl">
+    <section class="content-header">
+        <h1>
+            Employer
+            <small>Boshqaruv paneli</small>
+        </h1>
+    </section>
+    <!-- Main content -->
+    <section class="content" style="min-height: 500px">
+        <div class="row">
+            <div class="col-xs-12">
+                <div class="box">
+                    <div class="box-header">
+                        <div class="row" style="margin-top: 10px">
+                            <div class="col-sm-6">
+                                <small style="font-size: 18px;">Ro'yhatga olingan talabalar</small>
+                            </div>
+                            <div class="col-sm-6">
+                                <button data-toggle="modal" data-target="#whsModal" class="btn btn-success btn-sm"
+                                        style="float: right;" ng-click="getGroups()"><i class="fa  fa-user-plus"> </i></button>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- /.box-header -->
+                    <div class="box-body">
+                        <table class="table table-bordered table-hover">
+                            <thead>
+                            <tr>
+                                <th>№</th>
+                                <th>F.I.O</th>
+                                <th>Tug`ilgan sana</th>
+                                <th>Millati</th>
+                                <th>Malumoti</th>
+                                <th>Telefon</th>
+                                <th>Pochta</th>
+                                <th>Sozlash</th>
+                            </tr>
+                            <tr>
+                                <td></td>
+                                <td><input type="text" class="input-group" ng-keyup="generate()" ng-model="searchName"/></td>
+                                <!--<td><input type="text" class="input-group" ng-keyup="generate()" ng-model="searchSurname"/></td>-->
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr ng-repeat="i in employerData">
+                                <td>{{$index + 1}}</td>
+                                <td>{{i.fio}}</td>
+                                <td>{{i.birthDate}}</td>
+                                <td>{{i.nationality}}</td>
+                                <td>
+                                    <p ng-repeat="x in i.list">
+                                        {{x.university+" "+x.startDate+" "+x.endDate}}
+                                    </p>
+                                </td>
+                                <td>{{i.phone}}</td>
+                                <td>{{i.email}}</td>
+                                <td>
+                                    <button class="btn btn-danger btn-xs"><span
+                                            class="glyphicon glyphicon-trash" ng-click="delete(whs.id)" data-toggle="modal" data-target="#deletModal"></span></button>
+                                    <button class="btn btn-primary btn-xs" ng-click="editBtn(whs.id)"
+                                            data-toggle="modal" data-target="#whsModal"
+                                    ><span class="glyphicon glyphicon-pencil"></span></button>
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                        <div class="form-group">
+                            <nav aria-label="Page navigation example">
+                                <ul class="pagination" ng-repeat="i in peginationSize">
+                                    <li class="page-item"><a href="#" class="page-link" ng-click="getByPagination($index,searchName)">{{i}}</a></li>
+                                </ul>
+                            </nav>
+
+                        </div>
+                    </div>
+                    <!-- /.box-body -->
+                </div>
+                <!-- /.box -->
+
+            </div>
+            <!-- /.col -->
+        </div>
+        <!-- /.row -->
+        <!-- Small boxes (Stat box) -->
+    </section>
+
+    <!-- Delete Modal -->
+    <div class="modal fade" id="deletModal" role="dialog">
+        <div class="modal-dialog modal-sm">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" ng-click="clearallData()">&times;</button>
+                    <h4 class="modal-title">Haqiqatan o`chirmoqchimisiz {{deletedName}}</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="form-group">
+                            <input type="button" value="Xa" ng-click="deletIt()"  class="btn btn-success" data-dismiss="modal" >
+                            <input type="button" value="Yo`q" class="btn btn-danger" data-dismiss="modal">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Add and edit Modal -->
+    <div class="modal fade" id="whsModal" role="dialog" >
+        <div class="modal-dialog modal-md">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Yangi ishchi ro`yhatga olish</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="">
+                            <form role="form">
+                                <div class="box-body">
+                                    <div class="form-group">
+                                        <label for="exampleInputEmail1">Ism</label>
+                                        <div class="input-group">
+                                            <input id="exampleInputEmail1" type="text" class="form-control"
+                                                   placeholder="Sabirov Jahongir Shavkatovich"
+                                                   ng-model="fio" ng-keyup="filter1='';">
+                                            <span class="input-group-addon"><i class="fa fa-font"></i></span>
+                                        </div>
+                                        <!-- Filter for first data -->
+                                        <div class="input-group">
+                                            <label style="color: red">{{filter1}}</label>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="input022">Tug`ilgan sana</label>
+                                        <div class="input-group">
+                                            <input id="input022" type="text" class="form-control"
+                                                   placeholder="dd.mm.yyyy"
+                                                   ng-model="birthDate" ng-keyup="filter2='';">
+                                            <span class="input-group-addon"><i class="fa fa-font"></i></span>
+                                        </div>
+                                        <!-- Filter for second data -->
+                                        <div class="input-group">
+                                            <label style="color: red">{{filter2}}</label>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="input06">Millati</label>
+                                        <div class="input-group">
+                                            <input id="input06" type="text" class="form-control"
+                                                   ng-model="nation" ng-keyup="filter4='';">
+                                            <span class="input-group-addon"><i class="fa  fa-birthday-cake"></i></span>
+                                        </div>
+                                        <!-- Filter for first data -->
+                                        <div class="input-group">
+                                            <label style="color: red">{{filter4}}</label>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label>Ma'lumoti</label><br><br>
+                                        <label for="input10" >Tugatgan oliygoh nomi</label>
+                                        <div class="input-group">
+                                            <input id="input10" type="text" class="form-control"
+                                                   placeholder="Tatu"
+                                                   ng-model="ph" ng-keyup="filter5='';">
+                                            <span class="input-group-addon"></span>
+                                        </div>
+                                        <!-- Filter for first data -->
+                                        <div class="input-group">
+                                            <label style="color: red">{{filter5}}</label>
+                                        </div>
+                                        <!-- Boshlangan vaqti -->
+                                        <label for="start1">Boshlangan vaqti</label>
+                                        <div class="input-group">
+                                            <input id="start1" type="text" class="form-control" placeholder="boshlangan vaqti dd.mm.yyyy" ng-model="startDate">
+                                            <span class="input-group-addon"><i class="fa fa-font"></i></span>
+                                        </div>
+                                        <!-- Tugalangan vaqti -->
+                                        <label for="end1">Tugalangan vaqti</label>
+                                        <div class="input-group">
+                                            <input id="end1" type="text" class="form-control" placeholder="Tugalangan vaqti dd.mm.yyyy" ng-model="endDate">
+                                            <span class="input-group-addon"><i class="fa fa-font"></i></span>
+                                        </div>
+                                        <br>
+                                        <div class="input-group">
+                                            <button class="btn btn-default" ng-click="addEducation()">Qo`shish</button>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group" ng-repeat="x in education">
+                                        <div class="input-group">
+                                            <p class="form-control">
+                                                {{education[$index].university+" "+education[$index].startDate+" "+education[$index].endDate}}
+                                            </p>
+                                            <span class="input-group-addon"><button ng-click="removeeducation($index)"> X </button></span>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="input09">Address</label>
+                                        <div class="input-group">
+                                            <input id="input09" type="text" class="form-control"
+                                                   placeholder="M.horazm 86"
+                                                   ng-model="address" ng-keyup="filter6='';">
+                                            <span class="input-group-addon"><i class="fa fa-home"></i></span>
+                                        </div>
+                                        <!-- Filter for first data -->
+                                        <div class="input-group">
+                                            <label style="color: red">{{filter6}}</label>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="input067">Telefon</label>
+                                        <div class="input-group">
+                                            <input id="input067" type="text" class="form-control"
+                                                   ng-model="phone" ng-keyup="filter10='';" placeholder="8937555505" ng-keypress="onlyNumbers($event)">
+                                            <span class="input-group-addon"><i class="fa  fa-birthday-cake"></i></span>
+                                        </div>
+                                        <!-- Filter for first data -->
+                                        <div class="input-group">
+                                            <label style="color: red">{{filter10}}</label>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="input05">Pochta</label>
+                                        <div class="input-group">
+                                            <input id="input05" type="text" class="form-control"
+                                                   ng-model="mail" ng-keypress="validateEmail()">
+                                            <span class="input-group-addon"><i class="fa  fa-birthday-cake"></i></span>
+                                        </div>
+                                        <!-- Filter for first data -->
+                                        <div class="input-group">
+                                            <label style="color: red">{{filter4}}</label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="modal-footer">
+                    <button ng-click="btnWhsCtrl()" type="button" class="btn btn-success"
+                    >{{btnName}}
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--    data-dismiss="modal" in button -->
+
+
+
+</div>
