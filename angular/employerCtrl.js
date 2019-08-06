@@ -42,11 +42,11 @@ app.controller('employerCtrl',function ($scope,$http) {
     $scope.validateEmail = function () {
         var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
         if($scope.mail.match(re)){
-            $scope.filter4 = "";
+            $scope.filter6 = "";
             console.log("to`gri");
         }else{
             console.log("yes man m");
-            $scope.filter4 = "pochta hato";
+            $scope.filter6 = "pochta hato";
         }
     }
     //Only numeric value accept input form
@@ -59,6 +59,64 @@ app.controller('employerCtrl',function ($scope,$http) {
             theEvent.returnValue = false;
             if (theEvent.preventDefault) theEvent.preventDefault();
         }
+    }
+    $scope.checkAllFields = function () {
+        var rt = true;
+        if($scope.fio == undefined){
+            $scope.filter1 = "Ma`lumotni kiriting";
+            rt &= false;
+        }else{
+            if($scope.fio.length == 0){
+                $scope.filter1 = "Ma`lumotni kiriting";
+                rt &= false;
+            }
+            else{
+                $scope.filter1 = "";
+                rt &= true;
+            }
+        }
+
+        if($scope.birthDate == undefined){
+            $scope.filter2 = "Ma'lumotni kiriting";
+            rt &= false;
+        }else{
+            if($scope.birthDate.length == 0){
+                $scope.filter2 = "Ma'lumotni kiriting";
+                rt &= false;
+            }else{
+                $scope.filter2 = "";
+                rt &= true;
+            }
+        }
+        if($scope.nation == undefined){
+            $scope.filter3 = "Ma'lumotni kiriting";
+            rt &= false;
+        }else{
+            if($scope.nation.length == 0){
+                $scope.filter3 = "Ma'lumotni kiriting";
+                rt &= false;
+            }else{
+                $scope.filter3 = "";
+                rt &= true;
+            }
+        }
+        if($scope.phone == undefined){
+            $scope.filter10 = "Ma'lumotni kiriting";
+            rt &= false;
+        }else{
+            if($scope.phone.length == 0){
+                $scope.filter10 = "Ma'lumotni kiriting";
+                rt &= false;
+            }else{
+                $scope.filter10 = "";
+                rt &= true;
+            }
+        }
+
+
+    }
+    $scope.saveData = function () {
+        $scope.checkAllFields();
     }
 
 })

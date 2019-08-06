@@ -155,12 +155,12 @@
                                         <label for="input06">Millati</label>
                                         <div class="input-group">
                                             <input id="input06" type="text" class="form-control"
-                                                   ng-model="nation" ng-keyup="filter4='';">
+                                                   ng-model="nation" ng-keyup="filter3='';">
                                             <span class="input-group-addon"><i class="fa  fa-birthday-cake"></i></span>
                                         </div>
                                         <!-- Filter for first data -->
                                         <div class="input-group">
-                                            <label style="color: red">{{filter4}}</label>
+                                            <label style="color: red">{{filter3}}</label>
                                         </div>
                                     </div>
 
@@ -170,13 +170,14 @@
                                         <div class="input-group">
                                             <input id="input10" type="text" class="form-control"
                                                    placeholder="Tatu"
-                                                   ng-model="ph" ng-keyup="filter5='';">
+                                                   ng-model="ph" ng-keyup="filter4='';">
                                             <span class="input-group-addon"></span>
                                         </div>
                                         <!-- Filter for first data -->
                                         <div class="input-group">
-                                            <label style="color: red">{{filter5}}</label>
+                                            <label style="color: red">{{filter4}}</label>
                                         </div>
+
                                         <!-- Boshlangan vaqti -->
                                         <label for="start1">Boshlangan vaqti</label>
                                         <div class="input-group">
@@ -194,7 +195,6 @@
                                             <button class="btn btn-default" ng-click="addEducation()">Qo`shish</button>
                                         </div>
                                     </div>
-
                                     <div class="form-group" ng-repeat="x in education">
                                         <div class="input-group">
                                             <p class="form-control">
@@ -203,19 +203,20 @@
                                             <span class="input-group-addon"><button ng-click="removeeducation($index)"> X </button></span>
                                         </div>
                                     </div>
-                                    <div class="form-group">
-                                        <label for="input09">Address</label>
-                                        <div class="input-group">
-                                            <input id="input09" type="text" class="form-control"
-                                                   placeholder="M.horazm 86"
-                                                   ng-model="address" ng-keyup="filter6='';">
-                                            <span class="input-group-addon"><i class="fa fa-home"></i></span>
-                                        </div>
-                                        <!-- Filter for first data -->
-                                        <div class="input-group">
-                                            <label style="color: red">{{filter6}}</label>
-                                        </div>
-                                    </div>
+
+                                    <!--<div class="form-group">-->
+                                        <!--<label for="input09">Address</label>-->
+                                        <!--<div class="input-group">-->
+                                            <!--<input id="input09" type="text" class="form-control"-->
+                                                   <!--placeholder="M.horazm 86"-->
+                                                   <!--ng-model="address" ng-keyup="filter5='';">-->
+                                            <!--<span class="input-group-addon"><i class="fa fa-home"></i></span>-->
+                                        <!--</div>-->
+                                        <!--&lt;!&ndash; Filter for first data &ndash;&gt;-->
+                                        <!--<div class="input-group">-->
+                                            <!--<label style="color: red">{{filter5}}</label>-->
+                                        <!--</div>-->
+                                    <!--</div>-->
 
                                     <div class="form-group">
                                         <label for="input067">Telefon</label>
@@ -239,7 +240,7 @@
                                         </div>
                                         <!-- Filter for first data -->
                                         <div class="input-group">
-                                            <label style="color: red">{{filter4}}</label>
+                                            <label style="color: red">{{filter6}}</label>
                                         </div>
                                     </div>
                                 </div>
@@ -249,7 +250,7 @@
                 </div>
 
                 <div class="modal-footer">
-                    <button ng-click="btnWhsCtrl()" type="button" class="btn btn-success"
+                    <button ng-click="saveData()" type="button" class="btn btn-success"
                     >{{btnName}}
                     </button>
                 </div>
